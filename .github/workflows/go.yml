@@ -60,4 +60,12 @@ jobs:
     needs: build
     uses: ./.github/workflows/Docker.yaml
     secrets: inherit
+
+  Deploy_EC2:
+    #Para essa rotina rodar elaa precisa ter completaado aa tarefa de build
+    needs: build
+    #Aqui nós definimos qual arquivo de rotinaa ele irá usar 
+    uses: ./.github/workflows/EC2.yaml
+    secrets: inherit
+  
     
