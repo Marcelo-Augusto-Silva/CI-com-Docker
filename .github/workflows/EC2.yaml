@@ -23,7 +23,9 @@ jobs:
       uses: easingthemes/ssh-deploy@main
       with:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        # Ip da EC2
         REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+        #Nome do usuario da Ec2
         REMOTE_USER: ${{ secrets.REMOTE_USER }}
         #TARGET é o caminho no servidor remoto onde os arquivos do seu projeto serão enviados durante o deploy.
         TARGET: /home/${{ secrets.REMOTE_USER }}
@@ -37,6 +39,8 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         #O DBHOST é o endpoint do banco de dados que pegamos na aws
+        #Na linha 51 nós colocamos para a saide do nhup sair no arquivo nohup.out e os erros na nohup.err
+        # o < /dev/null serve para sempre que o terminal pedir uma entrada ele preencher com um vazio para não parar o terminal
         script: |
           export HOST=${{ secrets.DBHOST }}
           export USER=${{ secrets.DBUSER }}
@@ -45,6 +49,6 @@ jobs:
           export DBPORT=${{ secrets.DBPORT }}
           export PORT=8000
           chmod +x main
-          nohup ./main &
+          nohup ./main > nohup.out 2> nohup.err < /dev/null &
 
     
