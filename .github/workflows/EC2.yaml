@@ -33,7 +33,7 @@ jobs:
       uses: appleboy/ssh-action@v1
       with:
         host: ${{ secrets.REMOTE_HOST }}
-        username: linuxserver.io
+        username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         #O DBHOST é o endpoint do banco de dados que pegamos na aws
